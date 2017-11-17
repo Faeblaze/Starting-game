@@ -9,7 +9,8 @@ public class enemy : MonoBehaviour {
     Transform targetPathNode;
     int pathNodeIndex = 0;
     float speed = 5f;
-
+	public float health = 1f
+		
 	// Use this for initialization
 	void Start () {
         pathGO = GameObject.Find("Path");
