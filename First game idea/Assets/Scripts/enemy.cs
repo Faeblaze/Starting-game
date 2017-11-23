@@ -9,24 +9,29 @@ public class enemy : MonoBehaviour {
     Transform targetPathNode;
     int pathNodeIndex = 0;
     float speed = 5f;
-	public float health = 1f
-		
-	// Use this for initialization
-	void Start () {
+    public float health = 1f;
+    public int moneyValue = 1;
+
+   // Use this for initialization
+    void Start ()
+    {
         pathGO = GameObject.Find("Path");
 	}
 	//Specify method to follow path
-    void GetNextPathNode()
+    void GetNextPathNode ()
     {
         targetPathNode = pathGO.transform.GetChild(pathNodeIndex);
         pathNodeIndex++;
     }
 
 	// Update is called once per frame
-	void Update () {
-        if (targetPathNode == null){
+	void Update ()
+    {
+        if (targetPathNode == null)
+        {
             GetNextPathNode();
-            if (targetPathNode == null) {
+            if (targetPathNode == null)
+            {
                 //Run out of Path
                 ReachedGoal();
             }
@@ -49,6 +54,21 @@ public class enemy : MonoBehaviour {
     }
     void ReachedGoal()
     {
+        GameObject.FindObjectOfType<ScoreManager>().LoseLife();
         Destroy(gameObject);
     }
+    public void TakeDamage (float damage)
+    {
+        health -= damage;
+        if(health <= 0)
+        {
+            Die():
+                }
+    }
+}
+
+    public void Die()
+{
+    GameObject.FindObjectOfType<ScoreManager>().money += moneyValue;
+    Destroy(gameObject);
 }
