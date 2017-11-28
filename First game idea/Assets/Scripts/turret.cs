@@ -13,6 +13,6 @@ public class turret : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        enemy[] enemies = GameObject.FindObjectOfType<enemy>;
+        enemy[] enemies = GameObject.FindObjectsOfType<enemy>();
 	}
 }

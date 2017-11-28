@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemy : MonoBehaviour {
+public class enemy : MonoBehaviour
+{
 
     // enemy movements and naming
     GameObject pathGO;
@@ -12,20 +13,20 @@ public class enemy : MonoBehaviour {
     public float health = 1f;
     public int moneyValue = 1;
 
-   // Use this for initialization
-    void Start ()
+    // Use this for initialization
+    void Start()
     {
         pathGO = GameObject.Find("Path");
-	}
-	//Specify method to follow path
-    void GetNextPathNode ()
+    }
+    //Specify method to follow path
+    void GetNextPathNode()
     {
         targetPathNode = pathGO.transform.GetChild(pathNodeIndex);
         pathNodeIndex++;
     }
 
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update()
     {
         if (targetPathNode == null)
         {
@@ -49,7 +50,7 @@ public class enemy : MonoBehaviour {
         else
         {
             //Moving toward Node-next
-            transform.Translate(dir.normalized * distThisFrame, Space.World );
+            transform.Translate(dir.normalized * distThisFrame, Space.World);
         }
     }
     void ReachedGoal()
@@ -57,18 +58,19 @@ public class enemy : MonoBehaviour {
         GameObject.FindObjectOfType<ScoreManager>().LoseLife();
         Destroy(gameObject);
     }
-    public void TakeDamage (float damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
-        if(health <= 0)
+        if (health <= 0)
         {
-            Die():
-                }
+            Die();
+        }
     }
-}
+
 
     public void Die()
-{
-    GameObject.FindObjectOfType<ScoreManager>().money += moneyValue;
-    Destroy(gameObject);
+    {
+        GameObject.FindObjectOfType<ScoreManager>().money += moneyValue;
+        Destroy(gameObject);
+    }
 }

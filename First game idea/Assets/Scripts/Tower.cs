@@ -8,7 +8,8 @@ public class Tower : MonoBehaviour {
     float range = 10f;
     public GameObject bulletPrefab;
     float fireCooldown = 0.5f;
-    float fireCoodownLeft = 0;
+    float fireCooldownLeft = 0;
+    public enemy enemy;
 
     // Use this for initialization
     void Start() {
@@ -17,7 +18,7 @@ public class Tower : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        enemy[] enemies = GameObject.FindObjectOfType<Enemy>();
+        enemy[] enemies = GameObject.FindObjectsOfType<enemy>();
 
         enemy nearestEnemy = null;
         float dist = Mathf.Infinity;
@@ -38,7 +39,7 @@ public class Tower : MonoBehaviour {
 
         Quaternion lookRot = Quaternion.LookRotation(dir);
 
-        turretTransform.rotation = Quaternion.Euler(0, LookRot.eulerAngles.y, 0);
+        turretTransform.rotation = Quaternion.Euler(0, lookRot.eulerAngles.y, 0);
 
         fireCooldownLeft -= Time.deltaTime;
         if (fireCooldownLeft <= 0 && dir.magnitude <= range) {
@@ -46,11 +47,11 @@ public class Tower : MonoBehaviour {
             ShootAt(nearestEnemy);
         }
     }
-    void ShootAt(Enemy e)
+    void ShootAt(enemy e)
     {
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, transform.position, this.transform.rotation);
 
         Bullet b = bulletGO.GetComponent<Bullet>();
-        b.target = e.trandform;
+        b.target = e.transform;
     }
 }

@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour {
     }
     void DoBulletHit()
     {
-        target.getComponent<Enemy>().TakeDamage(damage);
+        target.GetComponent<enemy>().TakeDamage(damage);
         Destroy(gameObject);
     }
 }
