@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shoot : MonoBehaviour {
+public class BuildingManager : MonoBehaviour {
 
-	// Use this for initialization
+    public GameObject selectedTower;
+        
+    
+    // Use this for initialization
 	void Start () {
 		
 	}
