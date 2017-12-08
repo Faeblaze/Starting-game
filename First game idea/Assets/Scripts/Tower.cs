@@ -5,9 +5,9 @@ using UnityEngine;
 public class Tower : MonoBehaviour {
 
     public Transform GearTransform;
-    float range = 10f;
+    float range = 18f;
     public GameObject bulletPrefab;
-    float fireCooldown = 0.5f;
+    float fireCooldown = 0.75f;
     float fireCooldownLeft = 0;
     public enemy enemy;
 
