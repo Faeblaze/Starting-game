@@ -16,6 +16,13 @@ public class WaveSpawner : MonoBehaviour {
 
     public Text waveCountdownText;
 
+    ScoreManager scoreManager;
+
+    private void Awake()
+    {
+        scoreManager = GetComponent<ScoreManager>();
+    }
+
     // creating a countdown and then at 0 spawns waves
     //then reseting it after 0 is done and timebetweenwaves acts as new enemy timer
     private void Update()
@@ -28,7 +35,7 @@ public class WaveSpawner : MonoBehaviour {
         countdown -= Time.deltaTime;
 
         // Floor rounds the number NO DECIMALS, 
-        //Although rand stops JUMPING from 0-5 with the delay anyways.
+        //Although round stops JUMPING from 0-5 with the delay anyways.
         waveCountdownText.text = Mathf.Round(countdown).ToString();
     }
     // spawning groups of enemies
@@ -41,14 +48,18 @@ public class WaveSpawner : MonoBehaviour {
 
         for (int i = 0; i < waveIndex; i++)
         {
+            // this is what makes the enemy wait each wave within each wave.
             SpawnEnemy();
             yield return new WaitForSeconds(0.5f);
         }
-        
+
+    
     }
 
     void SpawnEnemy ()
     {
-        Instantiate(EnemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        GameObject enemyGO = Instantiate(EnemyPrefab, spawnPoint.position, spawnPoint.rotation).gameObject;
+        enemy enemy = enemyGO.GetComponent<enemy>();
+        enemy.scoreManager = scoreManager;
     }
 }

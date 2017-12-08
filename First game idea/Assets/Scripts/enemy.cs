@@ -11,7 +11,9 @@ public class enemy : MonoBehaviour
     int pathNodeIndex = 0;
     float speed = 5f;
     public float health = 1f;
-    public int moneyValue = 1;
+    public int moneyValue = 1;  
+    public ScoreManager scoreManager;
+    public bool reachedLastNode = false;
 
     // Use this for initialization
     void Start()
@@ -21,8 +23,15 @@ public class enemy : MonoBehaviour
     //Specify method to follow path
     void GetNextPathNode()
     {
-        targetPathNode = pathGO.transform.GetChild(pathNodeIndex);
-        pathNodeIndex++;
+        if (pathNodeIndex < pathGO.transform.childCount)
+        {
+            targetPathNode = pathGO.transform.GetChild(pathNodeIndex);
+            pathNodeIndex++;
+        }
+        else
+        {
+            targetPathNode = null;
+        }
     }
 
     // Update is called once per frame
@@ -35,6 +44,7 @@ public class enemy : MonoBehaviour
             {
                 //Run out of Path
                 ReachedGoal();
+                return;
             }
         }
         //moving the enemy to each child within the node-along path
@@ -53,11 +63,13 @@ public class enemy : MonoBehaviour
             transform.Translate(dir.normalized * distThisFrame, Space.World);
         }
     }
+
     void ReachedGoal()
     {
-        GameObject.FindObjectOfType<ScoreManager>().LoseLife();
+        scoreManager.LoseLife();
         Destroy(gameObject);
     }
+
     public void TakeDamage(float damage)
     {
         health -= damage;
@@ -73,4 +85,15 @@ public class enemy : MonoBehaviour
         GameObject.FindObjectOfType<ScoreManager>().money += moneyValue;
         Destroy(gameObject);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("LastNode"))
+        {
+            reachedLastNode = true;
+        }
+
+    }
+
+
 }
