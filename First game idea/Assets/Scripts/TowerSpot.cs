@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class TowerSpot : MonoBehaviour {
 
-	void OnMouseUp()
-    {
-        Debug.Log("TowerSpot clicked.");
+	public ScoreManager sm;
 
-        BuildingManager bm = GameObject.FindObjectOfType<BuildingManager>();
-        if (bm.selectedTower != null)
-        {
-            Instantiate(bm.selectedTower, transform.parent.position, transform.parent.rotation);
-            Destroy(transform.parent.gameObject);
-        }
+	// 
+	void OnMouseUp()
+    { 
+        Debug.Log("TowerSpot clicked.");
+		if (sm.money >= 30) 
+		{
+			sm.money -= 30;
+			BuildingManager bm = GameObject.FindObjectOfType<BuildingManager>();
+			if (bm.selectedTower != null)
+			{
+				Instantiate(bm.selectedTower, transform.parent.position, transform.parent.rotation);
+				Destroy(transform.parent.gameObject);
+
+			}
+
+		}
+		          
+
     }
+
 }

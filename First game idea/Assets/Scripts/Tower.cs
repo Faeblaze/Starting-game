@@ -7,7 +7,7 @@ public class Tower : MonoBehaviour {
     public Transform GearTransform;
     float range = 18f;
     public GameObject bulletPrefab;
-    float fireCooldown = 0.75f;
+    float fireCooldown = 0.6f;
     float fireCooldownLeft = 0;
     public enemy enemy;
 

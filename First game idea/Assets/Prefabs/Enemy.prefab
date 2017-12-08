@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18226b40b5857b4daf9a142fd7fa20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
-  moneyValue: 1
+  health: 3
+  moneyValue: 3
   scoreManager: {fileID: 0}
   reachedLastNode: 0

@@ -9,9 +9,9 @@ public class enemy : MonoBehaviour
     GameObject pathGO;
     Transform targetPathNode;
     int pathNodeIndex = 0;
-    float speed = 12f;
-    public float health = 2f;
-    public int moneyValue = 1;  
+    float speed = 11f;
+    public float health = 4f;
+    public int moneyValue = 4;  
     public ScoreManager scoreManager;
     public bool reachedLastNode = false;
 
